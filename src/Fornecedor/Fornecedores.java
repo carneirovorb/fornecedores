@@ -10,19 +10,17 @@ package Fornecedor;
  * @author Vorb
  */
 public class Fornecedores {
-    
-    
-    public void cadastrarFornecedor(){
-    
+
+    public void cadastrarFornecedor() {
+
     }
-    
-    public void atualizarFornecedor(){
-    
+
+    public void atualizarFornecedor() {
+
     }
-    
-    public void removerFornecedor(){
-    
+
+    public void removerFornecedor() {
+
     }
-    
-    
+
 }

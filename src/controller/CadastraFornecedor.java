@@ -16,32 +16,24 @@ import static javafx.application.Application.launch;
  */
 public class CadastraFornecedor {
 
-    
-        public void cadastra(int cnpj, String nome, int telefone, String email, String endereco) throws SQLException{
-            
+    public void cadastra(int cnpj, String nome, int telefone, String email, String endereco) throws SQLException {
+
         Connection conexao;
-       conexao = ConnectionDB.getConnection();
-        
-       PreparedStatement stmt = null;
-       
-       stmt = conexao.prepareStatement("INSERT INTO tb_fornecedores (cnpj, nome,telefone,email,endereco) VALUES(?,?,?,?,?)");
-       
-       stmt.setInt(1, cnpj);
-       stmt.setString(2, nome);
-       stmt.setInt(3, telefone);
-       stmt.setString(4, email);
-       stmt.setString(5, endereco);
-       
-       stmt.executeUpdate();
-       
-       ConnectionDB.closeConnection(conexao, stmt);
+        conexao = ConnectionDB.getConnection();
+
+        PreparedStatement stmt = null;
+
+        stmt = conexao.prepareStatement("INSERT INTO tb_fornecedores (cnpj, nome,telefone,email,endereco) VALUES(?,?,?,?,?)");
+
+        stmt.setInt(1, cnpj);
+        stmt.setString(2, nome);
+        stmt.setInt(3, telefone);
+        stmt.setString(4, email);
+        stmt.setString(5, endereco);
+
+        stmt.executeUpdate();
+
+        ConnectionDB.closeConnection(conexao, stmt);
         System.out.println("salvo");
-      
-       
-       
-        
-        }
-    
-    
-    
+    }
 }

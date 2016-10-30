@@ -20,13 +20,13 @@ import javafx.stage.Stage;
  * @author Vorb
  */
 public class GerenciarFornecedores extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("UI.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
     }
@@ -34,11 +34,10 @@ public class GerenciarFornecedores extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args){
-        
-       launch(args);
-      
-        
+    public static void main(String[] args) {
+
+        launch(args);
+
     }
-    
+
 }
