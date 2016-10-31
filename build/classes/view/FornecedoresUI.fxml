@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="563.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UIController">
+<AnchorPane id="AnchorPane" prefHeight="563.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UIController">
     <children>
       <Pane prefHeight="104.0" prefWidth="743.0">
          <children>
@@ -30,7 +32,22 @@
         <tabs>
           <Tab text="Buscar Fornecedor">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tbvFornecedores" prefHeight="419.0" prefWidth="743.0">
+                          <columns>
+                              <TableColumn fx:id="tbcId" prefWidth="75.0" text="Id" />
+                            <TableColumn fx:id="tbcNome" prefWidth="75.0" text="Nome" />
+                            <TableColumn fx:id="tbcCnpj" prefWidth="75.0" text="CNPJ" />
+                              <TableColumn fx:id="tbcTelefone" prefWidth="75.0" text="Telefone" />
+                              <TableColumn fx:id="tbcEmail" prefWidth="75.0" text="Email" />
+                              <TableColumn fx:id="tbcEndereco" prefWidth="75.0" text="Endereço" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children></AnchorPane>
             </content>
           </Tab>
           <Tab text="Cadastrar">
@@ -85,8 +102,8 @@
                            </font>
                         </Label>
                         <TextField fx:id="bairroLB" layoutX="377.0" layoutY="222.0" prefHeight="25.0" prefWidth="149.0" promptText="Bairro" />
-                        <Button fx:id="cadastrar" layoutX="412.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="31.0" prefWidth="141.0" text="cadastrar fornecedor" />
-                        <Button layoutX="22.0" layoutY="315.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="141.0" text="limpar campos" />
+                        <Button fx:id="cadastrar" layoutX="412.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="31.0" prefWidth="141.0" text="Salvar" />
+                        <Button layoutX="22.0" layoutY="315.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="141.0" text="Limpar" />
                      </children>
                   </AnchorPane>
             </content>

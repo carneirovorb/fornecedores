@@ -23,7 +23,8 @@ public class GerenciarFornecedores extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("UI.fxml"));
+        Parent root;
+        root = FXMLLoader.load(getClass().getResource("/view/FornecedoresUI.fxml"));
 
         Scene scene = new Scene(root);
 

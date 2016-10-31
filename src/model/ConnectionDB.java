@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,7 +22,7 @@ public class ConnectionDB {
     private static String DRIVER = "com.mysql.jdbc.Driver";
     private static String URL = "jdbc:mysql://localhost:3306/db_fornecedores";
     private static String USER = "root";
-    private static String PWD = "";
+    private static String PWD = "91237655";
 
     public static Connection getConnection() {
 
