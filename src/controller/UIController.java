@@ -76,8 +76,8 @@ public class UIController implements Initializable {
     private void handleButtonAction(ActionEvent event) throws SQLException {
         System.out.println("You clicked me!");
         String nome = nomeLB.getText();
-        int telefone = Integer.parseInt(telefoneLB.getText());
-        int cnpj = Integer.parseInt(cnpjLB.getText());
+        String telefone = telefoneLB.getText();
+        String cnpj = cnpjLB.getText();
         String email = emailLB.getText();
         String rua = ruaLB.getText();
         String numero = numeroLB.getText();
