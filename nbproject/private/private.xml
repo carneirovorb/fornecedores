@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/media/vorb/Data/git/ufrb/fornecedores/src/controller/UIController.java</file>
+            <file>file:/media/vorb/Data/git/ufrb/fornecedores/src/model/ConnectionDB.java</file>
+            <file>file:/media/vorb/Data/git/ufrb/fornecedores/src/model/CadastraFornecedor.java</file>
+        </group>
+>>>>>>> 4f9c5527e0a90c2302d57cb905b46ba27547112d
     </open-files>
 </project-private>
