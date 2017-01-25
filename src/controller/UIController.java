@@ -11,6 +11,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -49,7 +54,7 @@ public class UIController implements Initializable {
     @FXML
     private TextField bairroLB;
     //Fim da View Cadastrar
-    
+
     //View Buscar Fornecedor
     @FXML
     private TableView<Fornecedores> tbvFornecedores;
@@ -65,9 +70,9 @@ public class UIController implements Initializable {
     private TableColumn<Fornecedores, String> tbcEmail;
     @FXML
     private TableColumn<Fornecedores, String> tbcEndereco;
-    
+
     private List<Fornecedores> listFornecedores = new ArrayList<Fornecedores>();
-    
+
     private ObservableList<Fornecedores> observableFornecedores;
     //Fim da View Buscar Fornecedor
 
@@ -100,21 +105,72 @@ public class UIController implements Initializable {
             Logger.getLogger(UIController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    //Clique do mause em um elemento da lista de View
+    @FXML
+    public void listClick() {
+
+        Fornecedores lista = new Fornecedores();
+        lista = tbvFornecedores.getSelectionModel().getSelectedItem();
+
+        if (lista != null) {
+
+            String nome = lista.getNome();
+            long cnpj = lista.getCnpj();
+            String email = lista.getEmail();
+            String endereco = lista.getEndereco();
+            long telefone = lista.getTelefone();
+            String text = "Nome: " + nome + "\n"
+                    + "CNPJ: " + cnpj + "\n"
+                    + "Email: " + email + "\n"
+                    + "Endereço: " + endereco + "\n"
+                    + "Telefone: " + telefone + ".";
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle(nome);
+            alert.setHeaderText("Informação do Fornecedor");
+            alert.setContentText(text);
+
+            ButtonType btEditar = new ButtonType("Editar");
+            ButtonType btRemover = new ButtonType("Remover");
+            ButtonType btCancel = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(btEditar, btRemover, btCancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == btEditar) {
+                // ... user chose "One"
+            } else if (result.get() == btRemover) {
+                // ... user chose "Two"
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Celula Vazia");
+            alert.setHeaderText("Informaçao do Fornecedor");
+            alert.setContentText("Celula Vazia");
+
+           
+        }
+
+    }
+    //Fim da função de clique do mause.
+
     //View Buscar Fornecedores
-    public void carregarTableViewFornecedores() throws SQLException{
-        
+    public void carregarTableViewFornecedores() throws SQLException {
+
         BuscarFornecedor busca = new BuscarFornecedor();
-        
+
         tbcId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tbcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tbcCnpj.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
         tbcTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         tbcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         tbcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
-        
+
         listFornecedores = busca.buscar();
-        
+
         observableFornecedores = FXCollections.observableArrayList(listFornecedores);
         tbvFornecedores.setItems(observableFornecedores);
     }

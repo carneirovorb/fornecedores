@@ -13,8 +13,8 @@ public class Fornecedores {
 
     private int id;
     private String nome;
-    private int cnpj;
-    private int telefone;
+    private long cnpj;
+    private long telefone;
     private String email;
     private String endereco;
 
@@ -46,7 +46,7 @@ public class Fornecedores {
         this.nome = nome;
     }
 
-    public int getCnpj() {
+    public long getCnpj() {
         return cnpj;
     }
 
@@ -54,7 +54,7 @@ public class Fornecedores {
         this.cnpj = cnpj;
     }
 
-    public int getTelefone() {
+    public long getTelefone() {
         return telefone;
     }
 
