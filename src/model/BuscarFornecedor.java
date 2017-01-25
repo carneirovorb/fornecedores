@@ -46,4 +46,28 @@ public class BuscarFornecedor {
         return listFornecedores;
     }
     
+    public Fornecedores buscaSingle(String query) throws SQLException{
+        
+        Fornecedores f1 = new Fornecedores();
+        
+        Connection conexao;
+        conexao = ConnectionDB.getConnection();
+        
+        PreparedStatement stmt = null;
+        
+        stmt = conexao.prepareStatement("SELECT * FROM `tb_fornecedores` WHERE nome = '" + query + "'" + " OR cnpj = '" + query+"'");
+        ResultSet rs = stmt.executeQuery();
+        
+        while(rs.next()){
+            f1.setId(rs.getInt("id"));
+            f1.setNome(rs.getString("nome"));
+            f1.setCnpj(rs.getInt("cnpj"));
+            f1.setEmail(rs.getString("email"));
+            f1.setEndereco(rs.getString("endereco"));
+            f1.setTelefone(rs.getInt("telefone"));         
+        }
+        
+        return f1;
+    }
+    
 }

@@ -59,17 +59,15 @@ public class UIController implements Initializable {
     @FXML
     private TableView<Fornecedores> tbvFornecedores;
     @FXML
-    private TableColumn<Fornecedores, Integer> tbcId;
-    @FXML
     private TableColumn<Fornecedores, String> tbcNome;
     @FXML
     private TableColumn<Fornecedores, Integer> tbcCnpj;
     @FXML
-    private TableColumn<Fornecedores, Integer> tbcTelefone;
+    private Button btFiltrar;
     @FXML
-    private TableColumn<Fornecedores, String> tbcEmail;
+    private Button btRemover;
     @FXML
-    private TableColumn<Fornecedores, String> tbcEndereco;
+    private TextField tfNome;
 
     private List<Fornecedores> listFornecedores = new ArrayList<Fornecedores>();
 
@@ -151,7 +149,6 @@ public class UIController implements Initializable {
             alert.setHeaderText("Informaçao do Fornecedor");
             alert.setContentText("Celula Vazia");
 
-           
         }
 
     }
@@ -162,17 +159,58 @@ public class UIController implements Initializable {
 
         BuscarFornecedor busca = new BuscarFornecedor();
 
-        tbcId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tbcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tbcCnpj.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
-        tbcTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-        tbcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        tbcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 
         listFornecedores = busca.buscar();
 
         observableFornecedores = FXCollections.observableArrayList(listFornecedores);
         tbvFornecedores.setItems(observableFornecedores);
+    }
+
+    public void onFiltrar() {
+
+        BuscarFornecedor busca = new BuscarFornecedor();
+
+        Fornecedores lista = new Fornecedores();
+
+        try {
+            lista = busca.buscaSingle(tfNome.getText().toString());
+
+            String nome = lista.getNome();
+            long cnpj = lista.getCnpj();
+            String email = lista.getEmail();
+            String endereco = lista.getEndereco();
+            long telefone = lista.getTelefone();
+            String text = "Nome: " + nome + "\n"
+                    + "CNPJ: " + cnpj + "\n"
+                    + "Email: " + email + "\n"
+                    + "Endereço: " + endereco + "\n"
+                    + "Telefone: " + telefone + ".";
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle(nome);
+            alert.setHeaderText("Informação do Fornecedor");
+            alert.setContentText(text);
+
+            ButtonType btEditar = new ButtonType("Editar");
+            ButtonType btRemover = new ButtonType("Remover");
+            ButtonType btCancel = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(btEditar, btRemover, btCancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == btEditar) {
+                // ... user chose "One"
+            } else if (result.get() == btRemover) {
+                // ... user chose "Two"
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
+        } catch (Exception e) {
+            System.out.println("Erro: " + e);
+        }
+
     }
     //Fim da View Buscar Fornecedores
 }
