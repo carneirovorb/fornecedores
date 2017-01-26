@@ -22,7 +22,7 @@ public class ConnectionDB {
     private static String DRIVER = "com.mysql.jdbc.Driver";
     private static String URL = "jdbc:mysql://localhost:3306/db_fornecedores";
     private static String USER = "root";
-    private static String PWD = "91237655";
+    private static String PWD = "";
 
     public static Connection getConnection() {
 
