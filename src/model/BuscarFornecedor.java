@@ -34,8 +34,8 @@ public class BuscarFornecedor {
         while(rs.next()){
             int id = rs.getInt("id");
             String nome = rs.getString("nome");
-            int cnpj = rs.getInt("cnpj");
-            int telefone = rs.getInt("telefone");
+            String cnpj = rs.getString("cnpj");
+            String telefone = rs.getString("telefone");
             String email = rs.getString("email");
             String endereco = rs.getString("endereco");
             
@@ -61,10 +61,10 @@ public class BuscarFornecedor {
         while(rs.next()){
             f1.setId(rs.getInt("id"));
             f1.setNome(rs.getString("nome"));
-            f1.setCnpj(rs.getInt("cnpj"));
+            f1.setCnpj(rs.getString("cnpj"));
             f1.setEmail(rs.getString("email"));
             f1.setEndereco(rs.getString("endereco"));
-            f1.setTelefone(rs.getInt("telefone"));         
+            f1.setTelefone(rs.getString("telefone"));         
         }
         
         return f1;
