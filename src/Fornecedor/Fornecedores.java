@@ -13,15 +13,15 @@ public class Fornecedores {
 
     private int id;
     private String nome;
-    private long cnpj;
-    private long telefone;
+    private String cnpj;
+    private String telefone;
     private String email;
     private String endereco;
 
     public Fornecedores() {
     }
 
-    public Fornecedores(int id, String nome, int cnpj, int telefone, String email, String endereco) {
+    public Fornecedores(int id, String nome, String cnpj, String telefone, String email, String endereco) {
         this.id = id;
         this.nome = nome;
         this.cnpj = cnpj;
@@ -46,19 +46,19 @@ public class Fornecedores {
         this.nome = nome;
     }
 
-    public long getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(int cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
-    public long getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
