@@ -101,7 +101,6 @@ public class UIController implements Initializable {
     @FXML
     private AnchorPane editarFornecedor;
  
- 
     private List<Fornecedores> listFornecedores = new ArrayList<>();
 
     private ObservableList<Fornecedores> observableFornecedores;
@@ -124,7 +123,7 @@ public class UIController implements Initializable {
 
         CadastraFornecedor fornecedor = new CadastraFornecedor();
         fornecedor.cadastra(cnpj, nome, telefone, email, endereco);
-         carregarTableViewFornecedores();
+        carregarTableViewFornecedores();
 
     }
     //Fim da View Cadastrar
@@ -171,7 +170,6 @@ public class UIController implements Initializable {
 
     }
      
-     
      @FXML
      public void limparCampos(){
         nomeLB.setText("");
@@ -185,10 +183,7 @@ public class UIController implements Initializable {
 
     }
      
-     
-     
-     
-    
+
     @FXML
     public void salvaEdit() throws SQLException{
         System.out.println("entrou");
@@ -207,9 +202,6 @@ public class UIController implements Initializable {
      
        //fim rotina editar usuário
     
-    
-    
-     
     //Clique do mause em um elemento da lista de View
     @FXML
     public void listClick() throws SQLException {
@@ -281,8 +273,7 @@ public class UIController implements Initializable {
         observableFornecedores = FXCollections.observableArrayList(listFornecedores);
         tbvFornecedores.setItems(observableFornecedores);
     }
-
-    
+   //Fim da View Buscar Fornecedores
     
     //remover diretamente
     @FXML
@@ -295,8 +286,6 @@ public class UIController implements Initializable {
 
         Fornecedores lista = new Fornecedores();
 
-        
-        
         try {
 
             lista = busca.buscaSingle(tfNome.getText());           
@@ -350,11 +339,8 @@ public class UIController implements Initializable {
         }
          }
     }
-    //Fim da View Buscar Fornecedores
-    
-    
-    
-    
+ 
+//Inicio de filtrar
     public void onFiltrar() {
         
         if(!tfNome.getText().equals("")){
@@ -418,5 +404,5 @@ public class UIController implements Initializable {
         
     }
     }
-    //Fim da View Buscar Fornecedores
+    //Fim de Filtrar
 }

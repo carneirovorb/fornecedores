@@ -55,7 +55,7 @@ public class BuscarFornecedor {
         
         PreparedStatement stmt = null;
         
-        stmt = conexao.prepareStatement("SELECT * FROM `tb_fornecedores` WHERE nome = '" + query + "'" + " OR cnpj = '" + query+"'");
+        stmt = conexao.prepareStatement("SELECT * FROM `tb_fornecedores` WHERE nome like '%" + query + "%'" + " OR cnpj= '" + query+"'");
         ResultSet rs = stmt.executeQuery();
         
         while(rs.next()){
