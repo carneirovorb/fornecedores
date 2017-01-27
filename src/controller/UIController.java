@@ -100,9 +100,9 @@ public class UIController implements Initializable {
     
     @FXML
     private AnchorPane editarFornecedor;
- 
+    
+    int id;
     private List<Fornecedores> listFornecedores = new ArrayList<>();
-
     private ObservableList<Fornecedores> observableFornecedores;
     //Fim da View Buscar Fornecedor
 
@@ -130,20 +130,24 @@ public class UIController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         try {
+            
             carregarTableViewFornecedores();
-        } catch (SQLException ex) {
+        } 
+        
+        catch (SQLException ex) {
+            
             Logger.getLogger(UIController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    int id;
-    
     //rotina editar usuário
     @FXML
     public void editar(Fornecedores lista){
         
         System.out.println("entrou");
+        
         String nome = lista.getNome();
         String cnpj =  lista.getCnpj();
         String email = lista.getEmail();
@@ -166,13 +170,14 @@ public class UIController implements Initializable {
     
     @FXML
      public void cancelaEdit(){
+         
         editarFornecedor.setVisible(false);
-
     }
      
      @FXML
      public void limparCampos(){
-        nomeLB.setText("");
+         
+       nomeLB.setText("");
        telefoneLB.setText("");
        cnpjLB.setText("");
        emailLB.setText("");
@@ -180,12 +185,11 @@ public class UIController implements Initializable {
        numeroLB.setText("");
        bairroLB.setText("");
        cepLB.setText("");
-
     }
      
-
     @FXML
     public void salvaEdit() throws SQLException{
+        
         System.out.println("entrou");
         String cnpjNew = cnpjEdit.getText();
         String nomeNew = nomeEdit.getText();
@@ -197,10 +201,9 @@ public class UIController implements Initializable {
         altera.edita(cnpjNew, nomeNew, telefoneNew, emailNew, enderecoNew, id);
         editarFornecedor.setVisible(false);
         carregarTableViewFornecedores();
-
     }
      
-       //fim rotina editar usuário
+    //fim rotina editar usuário
     
     //Clique do mause em um elemento da lista de View
     @FXML
@@ -234,29 +237,30 @@ public class UIController implements Initializable {
             alert.getButtonTypes().setAll(btEditar, btRemover, btCancel);
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == btEditar) {
+            
+            if(result.get() == btEditar){ 
                 
+                editar(lista);  
+            } 
+            else if(result.get() == btRemover){
                 
-                editar(lista);
-                
-                
-            } else if (result.get() == btRemover) {
                 System.out.println("removeu");
+                
                 RemoverFornecedor remove = new RemoverFornecedor();
                 remove.remove(lista.getId());
                 carregarTableViewFornecedores();
-                
             }
-        }else{
+        }
+        else{
         
             try {
                 
-            } catch (Exception e) {
+            } 
+            catch (Exception e) {
+                
                 System.err.println("e");
-            }
-            
+            } 
         }
-
     }
     //Fim da função de clique do mause.
 
@@ -273,136 +277,119 @@ public class UIController implements Initializable {
         observableFornecedores = FXCollections.observableArrayList(listFornecedores);
         tbvFornecedores.setItems(observableFornecedores);
     }
-   //Fim da View Buscar Fornecedores
+    //Fim da View Buscar Fornecedores
     
     //remover diretamente
     @FXML
     public void onRemove() {
 
-         if(!tfNome.getText().equals("")){
-        System.out.println("remover");
-        
-        BuscarFornecedor busca = new BuscarFornecedor();
-
-        Fornecedores lista = new Fornecedores();
-
-        try {
-
-            lista = busca.buscaSingle(tfNome.getText());           
-            String nome = lista.getNome();
+        if(!tfNome.getText().equals("")){
             
+            System.out.println("remover");
+        
+            BuscarFornecedor busca = new BuscarFornecedor();
 
+            Fornecedores lista = new Fornecedores();
+
+            try {
+
+                lista = busca.buscaSingle(tfNome.getText());    
+            
+                String nome = lista.getNome();
                 String cnpj = lista.getCnpj();
                 String email = lista.getEmail();
                 String endereco = lista.getEndereco();
                 String telefone = lista.getTelefone();
                 String text = "Nome: " + nome + "\n"
-                        + "CNPJ: " + cnpj + "\n"
-                        + "Email: " + email + "\n"
-                        + "Endereço: " + endereco + "\n"
-                        + "Telefone: " + telefone + ".";
+                            + "CNPJ: " + cnpj + "\n"
+                            + "Email: " + email + "\n"
+                            + "Endereço: " + endereco + "\n"
+                            + "Telefone: " + telefone + ".";
 
                 if(lista.getNome()!=null){
-                    
-             
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle(nome);
-                alert.setHeaderText("Confirmar exclusão do fornecedor?");
-                alert.setContentText(text);
 
-                ButtonType btRemover = new ButtonType("Sim, Remover");
-                ButtonType btCancel = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle(nome);
+                    alert.setHeaderText("Confirmar exclusão do fornecedor?");
+                    alert.setContentText(text);
 
-                alert.getButtonTypes().setAll(btRemover, btCancel);
+                    ButtonType btRemover = new ButtonType("Sim, Remover");
+                    ButtonType btCancel = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-                Optional<ButtonType> result = alert.showAndWait();
+                    alert.getButtonTypes().setAll(btRemover, btCancel);
 
-                 if (result.get() == btRemover) {
-                    RemoverFornecedor remove = new RemoverFornecedor();
-                    remove.remove(lista.getId());
-                    carregarTableViewFornecedores();
-                   } 
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    if (result.get() == btRemover) {
+                     
+                        RemoverFornecedor remove = new RemoverFornecedor();
+                        remove.remove(lista.getId());
+                        carregarTableViewFornecedores();
+                    } 
                  
-             }else{
-                     Alert alert = new Alert(AlertType.INFORMATION);
+                }
+                else{
+                
+                    Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Erro");
                     alert.setHeaderText(null);
                     alert.setContentText("Fornecedor Não encontrado!");
 
                     alert.showAndWait();
-                 }   
-             }
-       
-              
-         catch (SQLException e) {
-            System.out.println("Erro: " + e);
+                }   
+            }
+            catch (SQLException e) {
+            
+                System.err.println("Erro: " + e);
+            }
         }
-         }
     }
  
-//Inicio de filtrar
+    //Inicio de filtrar
     public void onFiltrar() {
         
         if(!tfNome.getText().equals("")){
 
-        BuscarFornecedor busca = new BuscarFornecedor();
-
-        Fornecedores lista = new Fornecedores();
-
-        try {
-            lista = busca.buscaSingle(tfNome.getText());              
-                String nome = lista.getNome();          
-                String cnpj = lista.getCnpj();
-                String email = lista.getEmail();
-                String endereco = lista.getEndereco();
-                String telefone = lista.getTelefone();
-                String text = "Nome: " + nome + "\n"
-                        + "CNPJ: " + cnpj + "\n"
-                        + "Email: " + email + "\n"
-                        + "Endereço: " + endereco + "\n"
-                        + "Telefone: " + telefone + ".";
-
-                 if(lista.getNome()!=null){
-
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle(nome);
-                        alert.setHeaderText("Informação do Fornecedor");
-                        alert.setContentText(text);
-
-                        ButtonType btEditar = new ButtonType("Editar");
-                        ButtonType btRemover = new ButtonType("Remover");
-                        ButtonType btCancel = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-                        alert.getButtonTypes().setAll(btEditar, btRemover, btCancel);
-
-                        Optional<ButtonType> result = alert.showAndWait();
-
-                        if (result.get() == btEditar) {        
-                            editar(lista);
-                         } else if (result.get() == btRemover) {
-                          System.out.println("removeu");
-                          RemoverFornecedor remove = new RemoverFornecedor();
-                          remove.remove(lista.getId());
-                          carregarTableViewFornecedores();
-
-            }
-                        
-            
-                 }else{
-                     Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Erro");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Fornecedor Não encontrado!");
-
-                    alert.showAndWait();
-                 }                       
-       
-             }  
-         catch (SQLException e) {
-            System.out.println("Erro: " + e);
-        }
+            BuscarFornecedor busca = new BuscarFornecedor();
+            List<Fornecedores> listProvisoria = new ArrayList<Fornecedores>();
+            Fornecedores lista = new Fornecedores();
         
-    }
-    }
+            try{
+            
+                lista = busca.buscaSingle(tfNome.getText());
+        
+                tbcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+                tbcCnpj.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
+
+                listProvisoria.add(lista);
+
+                observableFornecedores = FXCollections.observableArrayList(listProvisoria);
+                tbvFornecedores.setItems(observableFornecedores);
+            }
+            catch(Exception e){
+                
+                System.err.println("Erro: " + e);
+            }
+        }
+        else{
+            
+            try{
+                
+                carregarTableViewFornecedores();
+            }
+            catch(Exception e){
+                
+                System.err.println("Erro: " + e);
+            }
+        
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Fornecedor Não encontrado!");
+
+            alert.showAndWait();
+        }                       
+       
+    }  
     //Fim de Filtrar
 }
