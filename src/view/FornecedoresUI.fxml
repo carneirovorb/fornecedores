@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import controller.validator.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="563.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UIController">
     <children>
@@ -66,13 +67,13 @@
                               <Font name="CordiaUPC" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="telefoneLB" layoutX="183.0" layoutY="91.0" prefHeight="25.0" prefWidth="148.0" promptText="telefone para contato" />
+                        <NumberTextField fx:id="telefoneLB" layoutX="183.0" layoutY="91.0" prefHeight="25.0" prefWidth="148.0" promptText="telefone para contato" />
                         <Label layoutX="363.0" layoutY="91.0" text="CNPJ:">
                            <font>
                               <Font name="CordiaUPC" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="cnpjLB" layoutX="437.0" layoutY="93.0" prefHeight="26.0" prefWidth="174.0" promptText="Numero de cnpj" />
+                        <NumberTextField fx:id="cnpjLB" layoutX="437.0" layoutY="93.0" prefHeight="26.0" prefWidth="174.0" promptText="Numero de cnpj" />
                         <Label layoutX="108.0" layoutY="137.0" text="Email:">
                            <font>
                               <Font name="CordiaUPC" size="20.0" />
@@ -90,13 +91,13 @@
                               <Font name="CordiaUPC" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="numeroLB" layoutX="542.0" layoutY="193.0" prefHeight="26.0" prefWidth="70.0" promptText="Numero" />
+                        <NumberTextField fx:id="numeroLB" layoutX="542.0" layoutY="193.0" prefHeight="26.0" prefWidth="70.0" promptText="Numero" />
                         <Label layoutX="115.0" layoutY="242.0" text="CEP:">
                            <font>
                               <Font name="CordiaUPC" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="cepLB" layoutX="183.0" layoutY="243.0" prefHeight="25.0" prefWidth="165.0" promptText="CEP" />
+                        <NumberTextField fx:id="cepLB" layoutX="183.0" layoutY="243.0" prefHeight="25.0" prefWidth="165.0" promptText="CEP" />
                         <Label layoutX="360.0" layoutY="243.0" text="Bairro:">
                            <font>
                               <Font name="CordiaUPC" size="20.0" />
@@ -128,13 +129,13 @@
                               <Font name="CordiaUPC" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="telefoneEdit" layoutX="202.0" layoutY="139.0" prefHeight="25.0" prefWidth="148.0" promptText="telefone para contato" />
+                        <NumberTextField fx:id="telefoneEdit" layoutX="202.0" layoutY="139.0" prefHeight="25.0" prefWidth="148.0" promptText="telefone para contato" />
                         <Label layoutX="382.0" layoutY="139.0" text="CNPJ:">
                            <font>
                               <Font name="CordiaUPC" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="cnpjEdit" layoutX="456.0" layoutY="141.0" prefHeight="25.0" prefWidth="153.0" promptText="Numero de cnpj" />
+                        <NumberTextField fx:id="cnpjEdit" layoutX="456.0" layoutY="141.0" prefHeight="25.0" prefWidth="153.0" promptText="Numero de cnpj" />
                         <Label layoutX="129.0" layoutY="194.0" text="Email:">
                            <font>
                               <Font name="CordiaUPC" size="20.0" />
@@ -152,13 +153,13 @@
                               <Font name="CordiaUPC" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="numeroEdit" layoutX="562.0" layoutY="251.0" prefHeight="25.0" prefWidth="44.0" promptText="Numero" />
+                        <NumberTextField fx:id="numeroEdit" layoutX="562.0" layoutY="251.0" prefHeight="25.0" prefWidth="44.0" promptText="Numero" />
                         <Label layoutX="136.0" layoutY="294.0" text="CEP:">
                            <font>
                               <Font name="CordiaUPC" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="cepEdit" layoutX="204.0" layoutY="295.0" prefHeight="25.0" prefWidth="165.0" promptText="CEP" />
+                        <NumberTextField fx:id="cepEdit" layoutX="204.0" layoutY="295.0" prefHeight="25.0" prefWidth="165.0" promptText="CEP" />
                         <Label layoutX="381.0" layoutY="295.0" text="Bairro:">
                            <font>
                               <Font name="CordiaUPC" size="20.0" />

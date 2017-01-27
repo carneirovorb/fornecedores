@@ -19,18 +19,24 @@ import java.util.List;
  */
 public class BuscarFornecedor {
     
-    public List<Fornecedores> buscar() throws SQLException{
-        
+public List<Fornecedores> buscar(String query) throws SQLException{
+       
         List<Fornecedores> listFornecedores = new ArrayList<Fornecedores>();
-        
+       
         Connection conexao;
         conexao = ConnectionDB.getConnection();
-        
-        PreparedStatement stmt = null;
        
-        stmt = conexao.prepareStatement("SELECT * FROM `tb_fornecedores` WHERE 1");
+        PreparedStatement stmt = null;
+        if(query == "nada"){
+       
+            stmt = conexao.prepareStatement("SELECT * FROM `tb_fornecedores` WHERE 1");
+        }
+        else {
+            stmt = conexao.prepareStatement("SELECT * FROM `tb_fornecedores` WHERE nome like '%" + query + "%'" + " OR cnpj= '" + query+"'");
+        }
+       
         ResultSet rs = stmt.executeQuery();
-        
+       
         while(rs.next()){
             int id = rs.getInt("id");
             String nome = rs.getString("nome");
@@ -38,11 +44,11 @@ public class BuscarFornecedor {
             String telefone = rs.getString("telefone");
             String email = rs.getString("email");
             String endereco = rs.getString("endereco");
-            
+           
             Fornecedores f1 = new Fornecedores(id, nome, cnpj, telefone, email, endereco);
             listFornecedores.add(f1);
         }
-        
+       
         return listFornecedores;
     }
     

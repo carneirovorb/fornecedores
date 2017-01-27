@@ -118,12 +118,25 @@ public class UIController implements Initializable {
         String numero = numeroLB.getText();
         String cep = cepLB.getText();
         String bairro = bairroLB.getText();
-
+        
+        if(!nome.equals("") && !cnpj.equals("") && !telefone.equals("") && !rua.equals("")&& !numero.equals("") && !cep.equals("")&& !bairro.equals("")){
+        
         String endereco = rua + "," + numero + "," + bairro + "," + cep;
 
         CadastraFornecedor fornecedor = new CadastraFornecedor();
         fornecedor.cadastra(cnpj, nome, telefone, email, endereco);
         carregarTableViewFornecedores();
+        limparCampos();
+         }else{
+        
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Erro");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Favor informar os campos obrigatórios!");
+
+                    alert.showAndWait();
+        
+        }
 
     }
     //Fim da View Cadastrar
@@ -186,21 +199,31 @@ public class UIController implements Initializable {
        bairroLB.setText("");
        cepLB.setText("");
     }
-     
+
     @FXML
     public void salvaEdit() throws SQLException{
-        
         System.out.println("entrou");
         String cnpjNew = cnpjEdit.getText();
         String nomeNew = nomeEdit.getText();
         String telefoneNew = telefoneEdit.getText();
         String emailNew = emailEdit.getText();
-        
-        String enderecoNew = ruaEdit.getText() + "," + numeroEdit.getText() + "," + bairroEdit.getText() + "," + cepEdit.getText();
-        AlterarFornecedor altera = new AlterarFornecedor();
-        altera.edita(cnpjNew, nomeNew, telefoneNew, emailNew, enderecoNew, id);
-        editarFornecedor.setVisible(false);
-        carregarTableViewFornecedores();
+         if(!nomeNew.equals("") && !cnpjNew.equals("") && !telefoneNew.equals("") && !ruaEdit.getText().equals("")&& !numeroEdit.getText().equals("") && !cepEdit.getText().equals("")&& !bairroEdit.getText().equals("")){
+            String enderecoNew = ruaEdit.getText() + "," + numeroEdit.getText() + "," + bairroEdit.getText() + "," + cepEdit.getText();
+            AlterarFornecedor altera = new AlterarFornecedor();
+            altera.edita(cnpjNew, nomeNew, telefoneNew, emailNew, enderecoNew, id);
+            editarFornecedor.setVisible(false);
+            carregarTableViewFornecedores();
+         }else{
+         
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Erro");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Favor informar os campos obrigatórios!");
+
+                    alert.showAndWait();
+         
+         }
+
     }
      
     //fim rotina editar usuário
@@ -265,15 +288,15 @@ public class UIController implements Initializable {
     //Fim da função de clique do mause.
 
     //View Buscar Fornecedores
-    public void carregarTableViewFornecedores() throws SQLException {
-
+   public void carregarTableViewFornecedores() throws SQLException {
+ 
         BuscarFornecedor busca = new BuscarFornecedor();
-
+ 
         tbcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tbcCnpj.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
-
-        listFornecedores = busca.buscar();
-
+ 
+        listFornecedores = busca.buscar("nada");
+ 
         observableFornecedores = FXCollections.observableArrayList(listFornecedores);
         tbvFornecedores.setItems(observableFornecedores);
     }
@@ -347,48 +370,46 @@ public class UIController implements Initializable {
  
     //Inicio de filtrar
     public void onFiltrar() {
-        
+       
         if(!tfNome.getText().equals("")){
-
+ 
             BuscarFornecedor busca = new BuscarFornecedor();
             List<Fornecedores> listProvisoria = new ArrayList<Fornecedores>();
             Fornecedores lista = new Fornecedores();
-        
+       
             try{
-            
-                lista = busca.buscaSingle(tfNome.getText());
-        
+           
+                listProvisoria = busca.buscar(tfNome.getText());
+       
                 tbcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
                 tbcCnpj.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
-
-                listProvisoria.add(lista);
-
+ 
                 observableFornecedores = FXCollections.observableArrayList(listProvisoria);
                 tbvFornecedores.setItems(observableFornecedores);
             }
             catch(Exception e){
-                
+               
                 System.err.println("Erro: " + e);
             }
         }
         else{
-            
+           
             try{
-                
+               
                 carregarTableViewFornecedores();
             }
             catch(Exception e){
-                
+               
                 System.err.println("Erro: " + e);
             }
-        
+       
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Erro");
             alert.setHeaderText(null);
             alert.setContentText("Fornecedor Não encontrado!");
-
+ 
             alert.showAndWait();
-        }                       
+        }                      
        
     }  
     //Fim de Filtrar
