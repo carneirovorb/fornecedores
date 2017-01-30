@@ -408,7 +408,7 @@ public class UIController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Fornecedor Não encontrado!");
  
-            alert.showAndWait();
+            //alert.showAndWait();
         }                      
        
     }  
